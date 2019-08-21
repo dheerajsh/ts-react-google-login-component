@@ -1,0 +1,20 @@
+{
+    "compilerOptions": {
+        "outDir": "./lib/",
+        "sourceMap": true,
+        "noImplicitAny": true,
+        "module": "commonjs",
+        "target": "es5",
+        "resolveJsonModule": true,
+        "lib": ["es2015", "es5", "dom"],
+        "jsx": "react",
+        "baseUrl": "./src"
+    },
+    "include": [
+        "./src/**/*"
+    ],
+    "exclude": [
+        "./src/**/*.test.ts",
+        "./src/**/*.test.tsx"
+    ]
+}
