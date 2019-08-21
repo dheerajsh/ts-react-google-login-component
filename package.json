@@ -4,9 +4,11 @@
   "description": "typescript based react google login component that allow you to easily integrate with google login in your application",
   "main": "index.ts",
   "scripts": {
-    "test": "jest --config jestconfig.json",
+    "test": "tslint -p . &&  npm run test-unit && npm run build",
+    "test-unit": "jest",
     "build": "rm -rf lib && tsc",
-    "clean": "rm -fr node_modules && rm -fr package-lock.json && npm install"
+    "clean": "rm -fr node_modules && rm -fr package-lock.json && npm install",
+    "lint": "tslint -p ."
   },
   "keywords": [
     "react",
@@ -19,11 +21,29 @@
   ],
   "author": "Dheeraj Sharma",
   "license": "MIT",
-  "files": ["lib/**/*"],
+  "files": [
+    "lib/**/*"
+  ],
   "devDependencies": {
+    "@evojam/tslint-rules": "github:evojam/tslint-rules",
     "@types/gapi.auth2": "0.0.50",
+    "@types/jest": "^24.0.18",
     "@types/react": "16.9.0",
+    "jest": "24.7.1",
+    "ts-jest": "23.10.5",
     "tslint": "5.19.0",
-    "typescript": "3.5.3",
+    "typescript": "3.5.3"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.tsx?$": "ts-jest"
+    },
+    "testRegex": "/src/.*\\.test\\.(ts?|tsx?)$",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx"
+    ]
   }
 }

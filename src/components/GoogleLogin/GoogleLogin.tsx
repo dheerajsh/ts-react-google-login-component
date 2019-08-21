@@ -1,11 +1,7 @@
 import * as React from 'react'
 
-
 export interface IGoogleLoginButtonProps {
-    /**
-   * Interface that represents the different configuration parameters for the gapi.auth2.init method.
-   * Reference: https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiauth2clientconfig
-   */
+
     readonly clientConfig: gapi.auth2.ClientConfig,
     readonly singInOptions?: gapi.auth2.SigninOptions | gapi.auth2.SigninOptionsBuilder,
     readonly buttonText: string,
@@ -19,10 +15,10 @@ export interface IGoogleLoginButtonState {
     readonly disabled: boolean
 }
 
-function getScript(source: string, callback: () => void) {
+export function getScript(source: string, callback: () => void): void {
     const el = document.createElement('script')
-    el.onload = callback
-    el.src = source
+    el.addEventListener('load', callback)
+    el.setAttribute('src', source)
 
     document.body.appendChild(el)
 }
@@ -33,21 +29,20 @@ export class GoogleLoginButton extends React.Component<IGoogleLoginButtonProps, 
         super(props)
         // Loading google plateform api, if it's not loaded
         if (typeof gapi === 'undefined') {
-            this.setState({disabled: true})
+            this.setState({ disabled: true })
             getScript('https://apis.google.com/js/platform.js', () => {
                 gapi.load('auth2', () => {
                     gapi.auth2.init(props.clientConfig)
-                    this.setState({disabled: false})
+                    this.setState({ disabled: false })
                 })
             })
-        }
-        else {
-            this.setState({disabled: false})
+        } else {
+            this.setState({ disabled: false })
         }
     }
 
     readonly clickHandler = () => {
-        const { preLogin, responseHandler, singInOptions , onFailure} = this.props
+        const { preLogin, responseHandler, singInOptions, onFailure } = this.props
 
         // if there is pre login task
         preLogin && preLogin()
@@ -66,7 +61,7 @@ export class GoogleLoginButton extends React.Component<IGoogleLoginButtonProps, 
     }
 
     render(): JSX.Element {
-        const { classNames, buttonText } = this.props;
+        const { classNames, buttonText } = this.props
 
         return (
             <button

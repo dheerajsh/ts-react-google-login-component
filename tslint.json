@@ -1,0 +1,55 @@
+{
+    "extends": [
+      "@evojam/tslint-rules/react.tslint.json"
+    ],
+    "rules": {
+      "quotemark": [
+        true,
+        "single"
+      ],
+      "member-access": [
+        false
+      ],
+      "ordered-imports": [
+        true,
+        {
+          "import-sources-order": "lowercase-last"
+        }
+      ],
+      "max-line-length": [
+        150
+      ],
+      "curly": false,
+      "import-blacklist": [
+        true
+      ],
+      "interface-name": [
+        false
+      ],
+      "array-type": [
+        false
+      ],
+      "no-empty-interface": false,
+      "no-empty": false,
+      "no-expression-statement": false,
+      "brace-style": [
+        true,
+        "1tbs",
+        {
+          "allowSingleLine": true
+        }
+      ],
+      "prefer-method-signature": false,
+      "no-import-side-effect": [
+        true,
+        {
+          "ignore-module": "(\\.sass)$"
+        }
+      ],
+      "no-unused-variable": true,
+      "no-unused-expression": [true, "allow-fast-null-checks"]
+    },
+    "linterOptions": {
+      "exclude": ["src/**/*.json"]
+    }
+  }

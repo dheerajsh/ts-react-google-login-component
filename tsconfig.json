@@ -1,9 +1,9 @@
 {
     "compilerOptions": {
         "outDir": "./lib/",
-        "sourceMap": true,
         "noImplicitAny": true,
         "module": "commonjs",
+        "declaration": true,
         "target": "es5",
         "resolveJsonModule": true,
         "lib": ["es2015", "es5", "dom"],
