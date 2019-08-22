@@ -1,9 +1,6 @@
 # ts-react-google-login-component
 > Typescript based React Google Component to log users in through google
 
-[![version](https://img.shields.io/npm/v/react-google-login-component.svg?style=flat-square)](http://npm.im/react-google-login-component)
-[![MIT License](https://img.shields.io/npm/l/react-google-login-component.svg?style=flat-square)](http://opensource.org/licenses/MIT)
-
 ts-react-google-login-component is a module that easily lets you drop it into
 your existing project and get the benefits of Google Login. It's a plug and
 play component that'll fit in your workflow if your using standalone React or
@@ -20,45 +17,63 @@ npm install --save ts-react-google-login-component
 import React from 'react';
 import { GoogleLoginButton } from 'ts-react-google-login-component';
 
-class Login extends React.Component{
+export class Login extends React.Component {
 
-    constructor (props, context) {
-        super(props, context);
-    }
-
-    preLoginTracking () {
+    preLoginTracking(): void {
         console.log('Attemp to login with google');
     }
 
-    errorHandler(error){
-        console.error(error);
+    errorHandler(error: string): void{
+        // handle error if login got failed...
+        console.error(error)
     }
 
-    responseGoogle (googleUser) {
-        var id_token = googleUser.getAuthResponse().id_token;
-        var googleId = googleUser.getId();
+    responseGoogle(googleUser: gapi.auth2.GoogleUser): void {
+        const id_token = googleUser.getAuthResponse(true).id_token
+        const googleId = googleUser.getId()
 
-        console.log({ googleId });
-        console.log({accessToken: id_token});
-        //anything else you want to do(save to localStorage)...
+        console.log({ googleId })
+        console.log({accessToken: id_token})
+        // Make user login in your system
+        // login success tracking...
     }
 
-    render () {
+    render(): JSX.Element {
+        const clientConfig = { client_id: 'youappid' }
+
         return (
         <div>
-            <GoogleLogin socialId="yourClientID"
-                        className="google-login"
-                        scope="profile"
-                        prompt="select_account"
-                        fetchBasicProfile={false}
-                        responseHandler={this.responseGoogle}
-                        buttonText="Login With Google"/>
+                <GoogleLoginButton
+                    buttonText='continue with google'
+                    responseHandler={this.responseGoogle}
+                    clientConfig={clientConfig}
+                    preLogin={this.preLoginTracking}
+                    onFailure={this.errorHandler}
+                />
         </div>
-        );
+        )
     }
 
 }
+```
 
-export default Login;
+Since this component is using [gapi types][ https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiauth2clientconfig] you can use all config options available from google
 
+you can also use all signIn [options][https://openid.net/specs/openid-connect-basic-1_0.html#RequestParameters]
+```js
+render(): JSX.Element {
+        const clientConfig = { client_id: 'youappid' }
+        const signInOptions = { scope: 'profile' }
+
+        return (
+        <div>
+                <GoogleLoginButton
+                    buttonText='continue with google'
+                    responseHandler={this.responseGoogle}
+                    clientConfig={clientConfig}
+                    singInOptions={signInOptions}
+                />
+        </div>
+        )
+    }
 ```
