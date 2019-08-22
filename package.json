@@ -2,13 +2,19 @@
   "name": "ts-react-google-login-component",
   "version": "1.0.0",
   "description": "typescript based react google login component that allow you to easily integrate with google login in your application",
-  "main": "index.ts",
+  "main": "lib/index.js",
+  "types": "lib/index.d.ts",
   "scripts": {
     "test": "tslint -p . &&  npm run test-unit && npm run build",
     "test-unit": "jest",
     "build": "rm -rf lib && tsc",
     "clean": "rm -fr node_modules && rm -fr package-lock.json && npm install",
-    "lint": "tslint -p ."
+    "lint": "tslint -p .",
+    "prepare" : "npm run build",
+    "prepublishOnly" : "npm test && npm run lint",
+    "preversion" : "npm run lint",
+    "version" : "git add -A src",
+    "postversion" : "git push && git push --tags"
   },
   "keywords": [
     "react",
