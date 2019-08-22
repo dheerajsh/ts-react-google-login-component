@@ -1,6 +1,6 @@
 {
   "name": "ts-react-google-login-component",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "typescript based react google login component that allow you to easily integrate with google login in your application",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
@@ -20,6 +20,7 @@
     "react",
     "google",
     "auth",
+    "auth2",
     "typescript-react-google",
     "google-login",
     "google-signup",
@@ -33,7 +34,7 @@
   "devDependencies": {
     "@evojam/tslint-rules": "github:evojam/tslint-rules",
     "@types/gapi.auth2": "0.0.50",
-    "@types/jest": "^24.0.18",
+    "@types/jest": "24.0.18",
     "@types/react": "16.9.0",
     "jest": "24.7.1",
     "ts-jest": "23.10.5",

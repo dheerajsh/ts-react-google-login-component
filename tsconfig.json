@@ -5,7 +5,7 @@
         "module": "commonjs",
         "declaration": true,
         "target": "es5",
-        "resolveJsonModule": true,
+        "esModuleInterop": true,
         "lib": ["es2015", "es5", "dom"],
         "jsx": "react",
         "baseUrl": "./src"

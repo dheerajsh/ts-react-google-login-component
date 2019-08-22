@@ -1,4 +1,4 @@
-import * as React from 'react'
+import React, { Component } from 'react'
 
 export interface IGoogleLoginButtonProps {
 
@@ -23,7 +23,7 @@ export function getScript(source: string, callback: () => void): void {
     document.body.appendChild(el)
 }
 
-export class GoogleLoginButton extends React.Component<IGoogleLoginButtonProps, IGoogleLoginButtonState> {
+export class GoogleLoginButton extends Component<IGoogleLoginButtonProps, IGoogleLoginButtonState> {
 
     constructor(props: IGoogleLoginButtonProps) {
         super(props)
