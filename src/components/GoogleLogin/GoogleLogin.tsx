@@ -8,7 +8,7 @@ export interface IGoogleLoginButtonProps {
     readonly classNames?: string, // comma separated classes
     readonly preLogin?: () => void,
     readonly responseHandler: (response: gapi.auth2.GoogleUser) => void
-    readonly onFailure?: (error: string) => void
+    readonly failureHandler?: (error: string) => void
 }
 
 export interface IGoogleLoginButtonState {
@@ -42,7 +42,7 @@ export class GoogleLoginButton extends Component<IGoogleLoginButtonProps, IGoogl
     }
 
     readonly clickHandler = () => {
-        const { preLogin, responseHandler, singInOptions, onFailure } = this.props
+        const { preLogin, responseHandler, singInOptions, failureHandler } = this.props
 
         // if there is pre login task
         preLogin && preLogin()
@@ -54,7 +54,7 @@ export class GoogleLoginButton extends Component<IGoogleLoginButtonProps, IGoogl
                     responseHandler(googleUser)
                 })
                 .catch(reason => {
-                    onFailure && onFailure(reason.error)
+                    failureHandler && failureHandler(reason.error)
                 })
         }
 

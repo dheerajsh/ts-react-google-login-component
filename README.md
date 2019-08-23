@@ -1,5 +1,5 @@
 # ts-react-google-login-component
-> Typescript based React Google Component to log users in through google
+> Typescript based React Google Component to login users through google
 
 ts-react-google-login-component is a module that easily lets you drop it into
 your existing project and get the benefits of Google Login. It's a plug and
@@ -57,9 +57,9 @@ export class Login extends React.Component {
 }
 ```
 
-Since this component is using [gapi types][ https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiauth2clientconfig] you can use all config options available from google
+Since this component is using [gapi types](https://developers.google.com/api-client-library/javascript/reference/referencedocs#gapiauth2clientconfig), S0 you can use all config options available from google
 
-you can also use all signIn [options][https://openid.net/specs/openid-connect-basic-1_0.html#RequestParameters]
+you can also use all signIn [options](https://openid.net/specs/openid-connect-basic-1_0.html#RequestParameters) provided by Google
 ```js
 render(): JSX.Element {
         const clientConfig = { client_id: 'youappid' }
