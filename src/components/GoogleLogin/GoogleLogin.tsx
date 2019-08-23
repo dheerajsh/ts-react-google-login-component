@@ -41,6 +41,11 @@ export class GoogleLoginButton extends Component<IGoogleLoginButtonProps, IGoogl
         }
     }
 
+    componentDidMount(): void {
+        if (!this.props.classNames) {
+            gapi.signin2.render('ts-google-react-login', {theme: 'dark'})
+        }
+    }
     readonly clickHandler = () => {
         const { preLogin, responseHandler, singInOptions, failureHandler } = this.props
 
@@ -65,6 +70,7 @@ export class GoogleLoginButton extends Component<IGoogleLoginButtonProps, IGoogl
 
         return (
             <button
+                id='ts-google-react-login'
                 className={`${classNames ? classNames : ''}`}
                 onClick={this.clickHandler}
                 disabled={this.state.disabled}

@@ -1,6 +1,6 @@
 {
   "name": "ts-react-google-login-component",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "typescript based react google login component that allow you to easily integrate with google login in your application",
   "main": "lib/index.js",
   "types": "lib/index.d.ts",
