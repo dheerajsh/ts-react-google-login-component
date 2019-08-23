@@ -5,7 +5,7 @@ ts-react-google-login-component is a module that easily let you plug google logi
 play component that'll fit in your workflow if your using standalone React or
 React with Redux. It's originally created in Typescript so best for typescript applications and also can be used in any javascript applications.
 
-It initializes Google platform api js automatically only once when get rendered first time.
+It initializes Google platform api js automatically only once if it is not initialized yet.
 
 
 ##### Up to date with the latest API Version
