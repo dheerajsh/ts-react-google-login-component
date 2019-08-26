@@ -4,15 +4,18 @@ export interface IGoogleLoginButtonProps {
 
     readonly clientConfig: gapi.auth2.ClientConfig,
     readonly singInOptions?: gapi.auth2.SigninOptions | gapi.auth2.SigninOptionsBuilder,
-    readonly buttonText: string,
-    readonly classNames?: string, // comma separated classes
+    readonly buttonText?: string,
+    readonly classNames?: string,
     readonly preLogin?: () => void,
     readonly responseHandler: (response: gapi.auth2.GoogleUser) => void
-    readonly failureHandler?: (error: string) => void
-}
-
-export interface IGoogleLoginButtonState {
-    readonly disabled: boolean
+    readonly failureHandler?: (error: string) => void,
+    readonly children?: ReadonlyArray<JSX.Element> | JSX.Element
+    readonly renderOptions?: {
+        readonly width?: number,
+        readonly height?: number,
+        readonly longtitle?: boolean,
+        readonly theme?: 'light' | 'dark',
+    }
 }
 
 export function getScript(source: string, callback: () => void): void {
@@ -23,27 +26,27 @@ export function getScript(source: string, callback: () => void): void {
     document.body.appendChild(el)
 }
 
-export class GoogleLoginButton extends Component<IGoogleLoginButtonProps, IGoogleLoginButtonState> {
+export class GoogleLoginButton extends Component<IGoogleLoginButtonProps> {
 
     constructor(props: IGoogleLoginButtonProps) {
         super(props)
+    }
+
+    componentDidMount(): void {
+        const {classNames, children} = this.props
         // Loading google plateform api, if it's not loaded
         if (typeof gapi === 'undefined') {
             this.setState({ disabled: true })
             getScript('https://apis.google.com/js/platform.js', () => {
                 gapi.load('auth2', () => {
-                    gapi.auth2.init(props.clientConfig)
-                    this.setState({ disabled: false })
+                    gapi.auth2.init(this.props.clientConfig)
+                    if (!classNames && !children) {
+                        gapi.signin2.render('ts-google-react-login', {...this.props.renderOptions})
+                    }
                 })
             })
-        } else {
-            this.setState({ disabled: false })
-        }
-    }
-
-    componentDidMount(): void {
-        if (!this.props.classNames) {
-            gapi.signin2.render('ts-google-react-login', {theme: 'dark'})
+        } else if (!classNames && !children) {
+            gapi.signin2.render('ts-google-react-login', {...this.props.renderOptions})
         }
     }
     readonly clickHandler = () => {
@@ -66,18 +69,17 @@ export class GoogleLoginButton extends Component<IGoogleLoginButtonProps, IGoogl
     }
 
     render(): JSX.Element {
-        const { classNames, buttonText } = this.props
+        const { classNames, buttonText, children } = this.props
 
         return (
-            <button
+            <div
                 id='ts-google-react-login'
                 className={`${classNames ? classNames : ''}`}
                 onClick={this.clickHandler}
-                disabled={this.state.disabled}
             >
-                {React.Children}
-                {buttonText}
-            </button>
+                {children ? children : null}
+                {buttonText ? buttonText : null}
+            </div>
         )
     }
 }

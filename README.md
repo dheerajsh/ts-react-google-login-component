@@ -78,13 +78,42 @@ render(): JSX.Element {
         )
     }
 ```
+
+Totally customizable. You can customize the component as per your requirements. You can provide Child elements. you need to provide custom classes in classNames props.
+
+Note: If you do not provide any custom class, it will render with default [Google design](https://developers.google.com/identity/sign-in/web/build-button) you can update render options through renderOptions props. An example of customize button.
+
+```js
+render(): JSX.Element {
+        const clientConfig = { client_id: 'googleclientid'}
+        const signInOptions = { scope: 'profile' }
+
+        return (
+        <div>
+                <GoogleLogin
+                    classNames='custom_class center-block'
+                    responseHandler={this.responseGoogle}
+                    clientConfig={clientConfig}
+                    preLogin={this.preLoginTracking}
+                    failureHandler={this.errorHandler}
+                    singInOptions={signInOptions}
+                >
+                    <div className='google-logo'/>
+                    <div className='text'>Continue with Google</div>
+                </GoogleLogin>
+
+        </div>
+        )
+    }
+```
+
 ## Props
 |    params    |   value  |     required        |   description    |
 |:------------:|:--------:|:------------------------------------:|:----------------:|
 |    clientConfig |  object  |  Required |  Google Client config. Details below|
 |    singInOptions    |  object  |  Optional  |  Google SignIn option|
 | classNames |  string  | Optional | comma separated classes to change the style of component |
-| buttonText  |  string  |   Required  | Text that will be displayed |
+| buttonText  |  string  |   Optional  | Text that will be displayed |
 | responseHandler |  function  |  Required | callback function which will be called in case of successfull login and GoogleUser object will be passed |
 | preLogin |  function  |  Optional | callback function which will be called just befor authenticating from Google, usefull for tracking stuff|
 | failureHandler |  function  |  Optional | callback function which will be called in case of authentication failed from google with reason as string
@@ -180,3 +209,29 @@ render(): JSX.Element {
     redirect_uri?: string;
   }
   ```
+
+## Render options (If you decided to use Google default design)
+```js
+interface Options{
+
+    /**
+     * The width of the button in pixels (default: 120).
+     */
+    width?: number;
+
+    /**
+     * The height of the button in pixels (default: 36).
+     */
+    height?: number;
+
+    /**
+     * Display long labels such as "Sign in with Google" rather than "Sign in" (default: false).
+     */
+    longtitle?: boolean;
+
+    /**
+     * The color theme of the button: either light or dark (default: light).
+     */
+    theme?: string;
+}
+```
