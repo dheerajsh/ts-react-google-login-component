@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 
+import { getScript } from 'util/Util'
+
 export interface IGoogleLoginButtonProps {
 
     readonly clientConfig: gapi.auth2.ClientConfig,
@@ -16,14 +18,6 @@ export interface IGoogleLoginButtonProps {
         readonly longtitle?: boolean,
         readonly theme?: 'light' | 'dark',
     }
-}
-
-export function getScript(source: string, callback: () => void): void {
-    const el = document.createElement('script')
-    el.addEventListener('load', callback)
-    el.setAttribute('src', source)
-
-    document.body.appendChild(el)
 }
 
 export class GoogleLoginButton extends Component<IGoogleLoginButtonProps> {
