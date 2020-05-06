@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 
-import { getScript } from 'util/Util'
+import { getScript } from '@util/Util'
 
 export interface IGoogleLoginButtonProps {
 
