@@ -9,10 +9,6 @@
         "lib": ["es2015", "es5", "dom"],
         "jsx": "react",
         "baseUrl": "./src",
-        "paths": {
-            "@components/*": ["./components/*"],
-            "@util/*": ["./util/*"],
-        }
     },
     "include": [
         "./src/**/*"
