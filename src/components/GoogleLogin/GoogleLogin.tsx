@@ -6,7 +6,6 @@ export interface IGoogleLoginButtonProps {
 
     readonly clientConfig: gapi.auth2.ClientConfig,
     readonly singInOptions?: gapi.auth2.SigninOptions | gapi.auth2.SigninOptionsBuilder,
-    readonly buttonText?: string,
     readonly classNames?: string,
     readonly preLogin?: () => void,
     readonly responseHandler: (response: gapi.auth2.GoogleUser) => void
@@ -16,7 +15,7 @@ export interface IGoogleLoginButtonProps {
         readonly width?: number,
         readonly height?: number,
         readonly longtitle?: boolean,
-        readonly theme?: 'light' | 'dark',
+        readonly theme?: string, // must be either dark or light
     }
 }
 
@@ -63,7 +62,7 @@ export class GoogleLoginButton extends Component<IGoogleLoginButtonProps> {
     }
 
     render(): JSX.Element {
-        const { classNames, buttonText, children } = this.props
+        const { classNames, children } = this.props
 
         return (
             <div
@@ -72,7 +71,6 @@ export class GoogleLoginButton extends Component<IGoogleLoginButtonProps> {
                 onClick={this.clickHandler}
             >
                 {children ? children : null}
-                {buttonText ? buttonText : null}
             </div>
         )
     }

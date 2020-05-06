@@ -45,7 +45,6 @@ export class Login extends React.Component {
         return (
         <div>
                 <GoogleLoginButton
-                    buttonText='continue with google'
                     responseHandler={this.responseGoogle}
                     clientConfig={clientConfig}
                     preLogin={this.preLoginTracking}
@@ -69,7 +68,6 @@ render(): JSX.Element {
         return (
         <div>
                 <GoogleLoginButton
-                    buttonText='continue with google'
                     responseHandler={this.responseGoogle}
                     clientConfig={clientConfig}
                     singInOptions={signInOptions}
@@ -113,7 +111,6 @@ render(): JSX.Element {
 |    clientConfig |  object  |  Required |  Google Client config. Details below|
 |    singInOptions    |  object  |  Optional  |  Google SignIn option|
 | classNames |  string  | Optional | comma separated classes to change the style of component |
-| buttonText  |  string  |   Optional  | Text that will be displayed |
 | responseHandler |  function  |  Required | callback function which will be called in case of successfull login and GoogleUser object will be passed |
 | preLogin |  function  |  Optional | callback function which will be called just befor authenticating from Google, usefull for tracking stuff|
 | failureHandler |  function  |  Optional | callback function which will be called in case of authentication failed from google with reason as string
